@@ -25,25 +25,3 @@ variable "aws_region" {
   type    = string
   default = "eu-west-1"
 }
-
-# resources
-
-variable "ipfs_image_id" {
-  type    = string
-  default = "ami-abcd1234"
-}
-
-variable "ipfs_instance_type" {
-  type    = string
-  default = "t2.medium"
-}
-
-variable "ipfs_key_name" {
-  type    = string
-  default = "ipfs-keypair-name"
-}
-
-variable "ipfs_ebs_size" {
-  type    = number
-  default = 100
-}
