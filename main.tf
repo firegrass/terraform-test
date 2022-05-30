@@ -101,6 +101,18 @@ resource "aws_instance" "ipfs2" {
 
 }
 
+resource "aws_instance" "ipfs3" {
+
+  ami                         = var.ipfs_image_id
+  associate_public_ip_address = false
+  instance_type               = var.ipfs_instance_type
+  key_name                    = var.ipfs_key_name
+  availability_zone           = "${var.aws_region}c"
+  vpc_security_group_ids      = [aws_security_group.ipfs-sg.id]
+  subnet_id                   = "private-subnetid-3"
+
+}
+
 resource "aws_ebs_volume" "ipfs1" {
   availability_zone = "${var.aws_region}a"
   size              = var.ipfs_ebs_size
@@ -108,6 +120,11 @@ resource "aws_ebs_volume" "ipfs1" {
 
 resource "aws_ebs_volume" "ipfs2" {
   availability_zone = "${var.aws_region}b"
+  size              = var.ipfs_ebs_size
+}
+
+resource "aws_ebs_volume" "ipfs3" {
+  availability_zone = "${var.aws_region}c"
   size              = var.ipfs_ebs_size
 }
 
@@ -121,4 +138,10 @@ resource "aws_volume_attachment" "ipfs2" {
   device_name = "/dev/sda"
   volume_id   = aws_ebs_volume.ipfs2.id
   instance_id = aws_instance.ipfs2.id
+}
+
+resource "aws_volume_attachment" "ipfs3" {
+  device_name = "/dev/sda"
+  volume_id   = aws_ebs_volume.ipfs3.id
+  instance_id = aws_instance.ipfs3.id
 }
