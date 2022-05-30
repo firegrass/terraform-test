@@ -43,11 +43,6 @@ variable "ipfs_key_name" {
   default = "ipfs-keypair-name"
 }
 
-variable "ipfs_vpc_security_group_ids" {
-  type    = list(string)
-  default = ["sg-ipfs-arn"]
-}
-
 variable "ipfs_ebs_size" {
   type    = number
   default = 100
